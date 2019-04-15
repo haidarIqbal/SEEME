@@ -1,0 +1,20 @@
+extends layout
+block content
+    div.chat
+        div.chat__sidebar
+            h3 Your Contacts
+            hr
+            if friends
+                each friend, i in friends
+                    li.eachFriend(id= friend.id) #{friend.name}
+        div.chat__main
+            ol(id="messages").chat__messages
+            div.chat__footer
+                form(id="message")
+                    input(type="text", name="text")
+                    button(type="submit") Send
+    script(src="/node_modules//jquery/dist/jquery.min.js")
+    script(src="/node_modules/semantic-ui-css/semantic.min.js")
+    script(src="/node_modules/simplewebrtc/out/simplewebrtc-with-adapter.bundle.js")
+    script(src="/node_modules/socket.io-client/dist/socket.io.js")
+    script(src="/public/javascripts/dashboard.js")
