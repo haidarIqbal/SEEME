@@ -22,20 +22,19 @@ router.get('/login', function(req, res, next) {
 
 router.get('/dashboard', function(req, res, next) {
   if(req.isAuthenticated()) {
-    var friendsName;
     console.log(req.user.id);
-    User.getUserFriends(req.user.id,function(err,friendsList){
-      // console.log(friendsList[0].friends.length);
-      // console.log(friendsList[0].friends[0].FriendName);
-      // console.log(friendsList[0].friends[0]);
 
+    User.getUserFriends(req.user.id,function(err,friendsList){
+      console.log(friendsList);
       var List = friendsList[0].friends;
+      var Name= friendsList[0].name;
       var AllFriends = [];
       for(var eachFriend=0;eachFriend<List.length;eachFriend++){
         AllFriends.push({"name":List[eachFriend].FriendName,
         "id":List[eachFriend].userId});
       }
-      res.render('dashboard',{title:"Dashboard",friends:AllFriends});
+      res.render('dashboard',{title:"Dashboard",friends:AllFriends,name:Name,UserId:req.user.id});
+      
     });
   } else {
     res.redirect('/users/login')

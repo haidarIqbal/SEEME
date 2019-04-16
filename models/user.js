@@ -56,6 +56,6 @@ module.exports.createUser = function(newUser,callback){
 
 module.exports.getUserFriends = function(id,callback){
     var id = {_id:id}
-    User.find(id,{friends:"friends"},callback)
+    User.find(id,{friends:"friends",name:"name"},callback)
 }
 

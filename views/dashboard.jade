@@ -1,20 +1,44 @@
 extends layout
 block content
+    
     div.chat
         div.chat__sidebar
+            div(id="userInfo") #{name}
             h3 Your Contacts
             hr
             if friends
-                each friend, i in friends
-                    li.eachFriend(id= friend.id) #{friend.name}
-        div.chat__main
-            ol(id="messages").chat__messages
+                each friend, k in friends
+                    li.eachFriend(id= friend.id style="list-style-type:none") 
+                        span  #{friend.name}
+
+        div.chat__main(style="display:none")
+            video(id="local-video" autoplay hidden).ui.large
+            div(id="remote-videos").ui.stackable.grid
+                div.four.wide.column
+            div.chat__box
+                span.FriendInfo(id="friendName")
+                span.fas.fa-video.pull-right
+            ol(id="messages" ).chat__messages
             div.chat__footer
                 form(id="message")
-                    input(type="text", name="text")
+                    input(id="text", type="text", name="text")
                     button(type="submit") Send
+
+    script(id="message-template",type="text/template")
+        li.message
+            span.message__title
+                p.username {{from}}
+                p.message_body
+                   {{text }}
+                span {{ createdAt}}
+            
+
     script(src="/node_modules//jquery/dist/jquery.min.js")
     script(src="/node_modules/semantic-ui-css/semantic.min.js")
     script(src="/node_modules/simplewebrtc/out/simplewebrtc-with-adapter.bundle.js")
     script(src="/node_modules/socket.io-client/dist/socket.io.js")
+    script(src="/public/javascripts/mustache.js")
+    script(src="/public/javascripts/moment.js")
+    script(src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js")
     script(src="/public/javascripts/dashboard.js")
+

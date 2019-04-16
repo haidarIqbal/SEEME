@@ -19,13 +19,16 @@ var routes = require("./routes/index");
 var users = require("./routes/users");
 var flash = require('connect-flash');
 var bcrypt = require("bcryptjs");
-var socketIO = require("socket.io")
-var http= require("http")
+var socketIO = require("socket.io");
+var http= require("http");
+var moment = require("moment");
 var app = express();
 
 var port = process.env.PORT || '3000';
 var server = http.createServer(app);
-var io = socketIO(server)
+var io = socketIO(server);
+
+var connectedUsers ={};
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -84,16 +87,43 @@ app.use(function(req, res, next) {
 
 io.on('connection',(socket)=>{
   console.log("new User Connected");
+  
+  socket.on('username',function(data){
+    connectedUsers[data] = socket;
+    console.log(data);
 
+    socket.on('join-chat',function(info){
+      connectedUsers[info.to].emit('videochat',{
+        from:info.from,
+        room:info.room,
+        createdAt:new Date().getTime()
+      });
+    });
+  });
   // socket.emit('newEmail',{
   //   from:'mike',
   //   text:'hey whats going on',
   //   createdAt:new Date()
   // });
+  
+  socket.on('privateMessage',(message)=>{
+    if(message.to !== undefined){
+      console.log(connectedUsers[message.to])
+    connectedUsers[message.to].emit('newMessage',{
+      from:message.from,
+      text:message.text,
+      createdAt:new Date().getTime()
+    });
 
-  // socket.on('createEmail',(newEmail)=>{
-  //   console.log('new Email', newEmail);
-  // });
+    connectedUsers[message.from].emit('newMessage',{
+      from:message.from,
+      text:message.text,
+      createdAt:new Date().getTime()
+    });
+  }
+  console.log('new Message', message);
+
+  });
 
   socket.on("disconnect",()=>{
     console.log("user disconnected");

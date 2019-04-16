@@ -27,7 +27,7 @@ ul {
 h3 {
   font-weight: 600;
   text-align: center;
-  font-size: 1.5rem
+  font-size: 1.2rem
 }
 
 button {
@@ -49,7 +49,7 @@ button:disabled {
   display: flex;
   align-items: center;
   height: 100vh;
-  width: 100vw;
+  width: 100vh;
   justify-content: center;
   background: -moz-linear-gradient(125deg, rgba(39, 107, 130, 1) 0, rgba(49, 84, 129, 1) 100%);
   background: -webkit-gradient(linear, left top, right bottom, color-stop(0, rgba(49, 84, 129, 1)), color-stop(100%, rgba(39, 107, 130, 1)));
@@ -93,7 +93,7 @@ button:disabled {
 
 .chat__sidebar {
   overflow-y: scroll;
-  width: 260px;
+  width: 20%;
   height: 90vh;
   background: -moz-linear-gradient(125deg, rgba(39, 107, 130, 1) 0, rgba(49, 84, 129, 1) 100%);
   background: -webkit-gradient(linear, left top, right bottom, color-stop(0, rgba(49, 84, 129, 1)), color-stop(100%, rgba(39, 107, 130, 1)));
@@ -124,15 +124,16 @@ button:disabled {
 .chat__main {
   display: flex;
   flex-direction: column;
-  height: 90vh;
-  width: 100%
+  min-height: 70vh;
+  width: 90%
 }
 
 .chat__messages {
   flex-grow: 1;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: 10px
+  height: 69%;
+  padding: 5px
 }
 
 .chat__footer {
@@ -155,22 +156,22 @@ button:disabled {
   flex-grow: 1
 }
 
-.message {
-  padding: 10px
-}
+
 
 .message__title {
   display: flex;
-  margin-bottom: 5px
+  margin-bottom: 2px
 }
 
 .message__title h4 {
-  font-weight: 600;
-  margin-right: 10px
+  font-weight: 400;
+  margin-right: 5px
 }
 
 .message__title span {
-  color: #999
+  color: #999;
+  margin-top:0.4%;
+  margin-left: 0.5%;
 }
 
 @media (max-width:600px) {
@@ -193,4 +194,44 @@ button:disabled {
   .chat__footer button {
     margin-right: 0
   }
+}
+
+#userInfo{
+  padding:1.2%;
+  text-align: center;
+  font-size: 1.5em;
+  color:white;
+  font-weight: bold;
+  background-color: #2481bb;
+}
+.chat__box{
+  background-color: #1F4C69;
+  color:white;
+  padding: 2%;
+}
+
+.username{
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-top: 0.2%;
+}
+
+.message_body{
+  margin-left: 0.7%;
+  padding: 5px;
+  border-bottom-left-radius: 15%; 
+  border-bottom-right-radius: 10%; 
+  border-top-right-radius: 10%; 
+
+  background-color: #F2F6F9;
+}
+.fas{
+  color:white;
+  font-size:1.7em;
+  cursor: pointer;
+}
+
+#local-video{
+width:30%;
+height: 30%;
 }
