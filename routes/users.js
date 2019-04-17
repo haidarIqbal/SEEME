@@ -22,10 +22,7 @@ router.get('/login', function(req, res, next) {
 
 router.get('/dashboard', function(req, res, next) {
   if(req.isAuthenticated()) {
-    console.log(req.user.id);
-
     User.getUserFriends(req.user.id,function(err,friendsList){
-      console.log(friendsList);
       var List = friendsList[0].friends;
       var Name= friendsList[0].name;
       var AllFriends = [];
@@ -34,19 +31,18 @@ router.get('/dashboard', function(req, res, next) {
         "id":List[eachFriend].userId});
       }
       res.render('dashboard',{title:"Dashboard",friends:AllFriends,name:Name,UserId:req.user.id});
-      
     });
   } else {
     res.redirect('/users/login')
   }
 });
 
-  router.get('/call', function(req, res, next) {
-    if(req.isAuthenticated()) {
-      res.render('call',{title:"call"});
-    } else {
-      res.redirect('/users/login')
-    }});
+router.get('/call', function(req, res, next) {
+  if(req.isAuthenticated()) {
+    res.render('call',{title:"call"});
+  } else {
+    res.redirect('/users/login')
+  }});
 
 router.post('/login',function(req,res,next){
   passport.authenticate('local', function(err, user, info) {

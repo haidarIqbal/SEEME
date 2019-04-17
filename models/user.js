@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var bcrypt = require("bcryptjs")
-
+//
 mongoose.connect("mongodb+srv://haidar:Stain123@users-v1n2h.mongodb.net/test?retryWrites=true", { useNewUrlParser: true });
 
 var db =mongoose.connection;

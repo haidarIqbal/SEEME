@@ -61,6 +61,9 @@ socket.on('videochat',function(info){
       });
    console.log(info);
    webrtc.joinRoom(info.room);
+   webrtc.on('localStream', () => {
+    localVideoEl.show();
+  });
 
 });
 $('.eachFriend').on('click',function(e){
@@ -93,7 +96,7 @@ $('.fas').on('click',function(){
       webrtc.on('localStream', () => {
         localVideoEl.show();
       });
-})
+});
 
 function randomString(length, chars) {
     var result = '';
