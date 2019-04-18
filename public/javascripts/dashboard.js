@@ -96,6 +96,8 @@ $('.fas').on('click',function(){
       webrtc.on('localStream', () => {
         localVideoEl.show();
       });
+      $('.chat__box').css('display','none')
+      $('.chat__footer').css('display','none')
 });
 
 function randomString(length, chars) {

@@ -12,13 +12,13 @@ block content
                         span  #{friend.name}
 
         div.chat__main(style="display:none")
-            video(id="local-video" autoplay hidden).ui.large
             div(id="remote-videos").ui.stackable.grid
                 div.four.wide.column
+            video(id="local-video" ).ui.large
             div.chat__box
                 span.FriendInfo(id="friendName")
                 span.fas.fa-video.pull-right
-            ol(id="messages" ).chat__messages
+            ol(id="messages").chat__messages
             div.chat__footer
                 form(id="message")
                     input(id="text", type="text", name="text")
